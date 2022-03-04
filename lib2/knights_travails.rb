@@ -14,8 +14,6 @@ class KnightsTravails
 
   def travail(start_position = [3, 3], target_array = [4, 3], prev_moves = [])
     unless start_position.nil? || start_position == target_array
-      p prev_moves
-      p "start position #{start_position}"
       prev_moves.push(start_position)
       move_list = [[1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2]]
       pm = []
@@ -27,18 +25,13 @@ class KnightsTravails
           pm.push(move)
         end
       end
-      for move in pm
-        travail(move, target_array, prev_moves)
+      if @root.nil?
+        @root = Node.new(start_position, travail(pm[0], target_array, prev_moves), travail(pm[1], target_array, prev_moves), travail(pm[2], target_array, prev_moves), travail(pm[3], target_array, prev_moves), travail(pm[4], target_array, prev_moves), travail(pm[5], target_array, prev_moves), travail(pm[6], target_array, prev_moves), travail(pm[7], target_array, prev_moves))
+      else
+        new_node = Node.new(start_position, travail(pm[0], target_array, prev_moves), travail(pm[1], target_array, prev_moves), travail(pm[2], target_array, prev_moves), travail(pm[3], target_array, prev_moves), travail(pm[4], target_array, prev_moves), travail(pm[5], target_array, prev_moves), travail(pm[6], target_array, prev_moves), travail(pm[7], target_array, prev_moves))
       end
     end
   end
-  #     if @root.nil?
-  #       @root = Node.new(start_position, travail(pm[0], target_array, prev_moves), travail(pm[1], target_array, prev_moves), travail(pm[2], target_array, prev_moves), travail(pm[3], target_array, prev_moves), travail(pm[4], target_array, prev_moves), travail(pm[5], target_array, prev_moves), travail(pm[6], target_array, prev_moves), travail(pm[7], target_array, prev_moves))
-  #     else
-  #       new_node = Node.new(start_position, travail(pm[0], target_array, prev_moves), travail(pm[1], target_array, prev_moves), travail(pm[2], target_array, prev_moves), travail(pm[3], target_array, prev_moves), travail(pm[4], target_array, prev_moves), travail(pm[5], target_array, prev_moves), travail(pm[6], target_array, prev_moves), travail(pm[7], target_array, prev_moves))
-  #     end
-  #   end
-  # end
 
   def trav_ones(node = @root)
     unless node.nil?
